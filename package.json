@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prebuild": "cp -r assets public; postcss assets/css/style.css --use autoprefixer --use cssnano -o public/css/style.css",
     "build": "node --harmony_destructuring index.js"
   },
   "keywords": [],
@@ -13,6 +14,8 @@
     "async-each": "^1.0.0",
     "async-series": "0.0.1",
     "async-waterfall": "^0.1.5",
+    "autoprefixer": "^6.3.1",
+    "cssnano": "^3.4.0",
     "glob": "^6.0.4",
     "jade": "^1.11.0",
     "lodash.groupby": "^4.0.0",
@@ -21,6 +24,6 @@
     "lodash.trimstart": "^4.0.1",
     "mkdirp": "^0.5.1",
     "moment": "^2.11.1",
-    "ncp": "^2.0.0"
+    "postcss-cli": "^2.4.0"
   }
 }

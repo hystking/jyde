@@ -1,7 +1,6 @@
 "use strict";
 
 const fs = require("fs");
-const ncp = require("ncp");
 const path = require("path");
 const glob = require("glob");
 const jade = require("jade");
@@ -104,16 +103,18 @@ function renderPages(blogProps, callback) {
 }
 
 function renderIndex(blogProps, callback) {
-  fs.writeFile(
-    "public/index.html",
-    jade.compileFile("templates/index.jade")(Object.assign({page: blogProps.pages[0]}, blogProps)),
-    callback
-  );
+  waterfall([
+    partial(mkdirp, "public"),
+    partial(
+      fs.writeFile,
+      "public/index.html",
+      jade.compileFile("templates/index.jade")(Object.assign({page: blogProps.pages[0]}, blogProps))
+    ),
+  ]);
 }
 
 function constructBlog(blogProps, callback) {
   waterfall([
-    partial(mkdirp, "public"),
     partial(renderArticles, blogProps),
     partial(renderPages, blogProps),
     partial(renderIndex, blogProps),
@@ -157,7 +158,6 @@ waterfall([
   createArticles,
   createBlogProps,
   constructBlog,
-  partial(ncp, "assets", "public"),
 ], e => {
   if(e) {
     console.log(e);
