@@ -1,0 +1,12 @@
+extend layouts/base
+
+block append meta
+  //- Meta Infomation
+  title= meta.title
+  meta(name="description", content=meta.description)
+  meta(name="keywords", content=meta.keywords)
+
+
+block content
+  include partials/page-articles
+  include partials/page-nav

@@ -1,0 +1,17 @@
+extend layouts/base
+
+block append meta
+  //- Meta Infomation
+  title= article.title + " - " + meta.title
+  meta(name="description", content=meta.description)
+  meta(name="keywords", content=meta.keywords)
+  link(rel="canonical", href="/")
+
+block content
+  article.article
+    h1.article-title!= article.title
+    != article.body
+  if article.prevLink
+    a.prev-article(href=article.prevLink) Prev
+  if article.nextLink
+    a.next-article(href=article.nextLink) Next

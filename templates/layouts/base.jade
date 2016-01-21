@@ -1,0 +1,23 @@
+doctype
+html
+  head
+    block meta
+      //- Charset
+      meta(charset="utf-8")
+      
+      //- Favicon
+      link(rel="icon", type="image/vnd.microsoft.icon", href="/favicon.png")
+
+      //- Viewport
+      meta(name="viewport", content="width=device-width,initial-scale=1.0")
+
+    block stylesheet
+      link(href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css", rel="stylesheet")
+      link(href="/css/style.css", rel="stylesheet")
+
+    block script-head
+
+  body
+    h1.blog-title: a(href="/") ころしあえ.みんな
+    block content
+    block script-body
