@@ -51,6 +51,10 @@ a:hover:before {
   color: #c36;
 }
 
+.article h1 a:before {
+  display: none;
+}
+
 .article p {
   margin: 1em 0;
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "cp -r assets public; postcss assets/css/style.css --use autoprefixer --use cssnano -o public/css/style.css",
+    "prebuild": "rm -rf public; mkdir public; cp -r assets/* public; postcss assets/css/style.css --use autoprefixer --use cssnano -o public/css/style.css",
     "build": "node --harmony_destructuring index.js"
   },
   "keywords": [],
