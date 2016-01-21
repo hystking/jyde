@@ -54,7 +54,7 @@ function createArticles(filenames, callback) {
   }, (err, articles) => {
 
     // sort articles
-    const sortedArticles = articles.sort((a, b) => a.timestamp - b.timestamp);
+    const sortedArticles = articles.sort((a, b) => b.timestamp - a.timestamp);
 
     // add next prev links
     for(let i = 0; i < sortedArticles.length; i++) {
