@@ -9,7 +9,8 @@ block append meta
 
 block content
   article.article
-    h1.article-title!= article.title
+    p.article-date!= article.date
+    h1!= article.title
     != article.body
   if article.prevLink
     a.prev-article(href=article.prevLink) Prev

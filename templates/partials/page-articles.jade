@@ -1,4 +1,5 @@
 each article in page.articles
   article.article
-    h1.article-title: a(href=article.link)= article.title
+    p.article-date!= article.date
+    h1: a(href=article.link)= article.title
     != article.body
