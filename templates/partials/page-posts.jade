@@ -1,0 +1,5 @@
+each post in page.posts
+  article.post
+    p.post-date!= post.date
+    h1: a(href=post.link)= post.title
+    != post.body

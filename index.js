@@ -46,15 +46,15 @@ function createArticles(filenames, callback) {
   each(filenames, (filename, callback) => {
     fs.readFile(filename, (err, content) => {
       const basename = path.basename(filename, ".jade");
-      const link = `/articles/${basename}`
+      const link = `/posts/${basename}`
       const attributes = exactArticleAttributes(content);
       const body = jade.compile(content, {filename})({attributes});
       callback(null, Object.assign({body, basename, link}, attributes));
     });
-  }, (err, articles) => {
+  }, (err, posts) => {
 
-    // sort articles
-    const sortedArticles = articles.sort((a, b) => b.timestamp - a.timestamp);
+    // sort posts
+    const sortedArticles = posts.sort((a, b) => b.timestamp - a.timestamp);
 
     // add next prev links
     for(let i = 0; i < sortedArticles.length; i++) {
@@ -70,18 +70,18 @@ function createArticles(filenames, callback) {
   });
 }
 
-function getArticlesAt(articles, page, articlesPerPage) {
-  return articles.slice(articlesPerPage * page, articlesPerPage * (page + 1));
+function getArticlesAt(posts, page, postsPerPage) {
+  return posts.slice(postsPerPage * page, postsPerPage * (page + 1));
 }
 
 function renderArticles(blogProps, callback) {
   waterfall([
-    partial(mkdirp, "public/articles"),
+    partial(mkdirp, "public/posts"),
     partial(each, blogProps.pages, (page, callback) => {
-      each(page.articles, (article, callback) => {
+      each(page.posts, (post, callback) => {
         fs.writeFile(
-          `public/articles/${article.basename}.html`,
-          jade.compileFile("templates/article.jade")(Object.assign({article}, blogProps)),
+          `public/posts/${post.basename}.html`,
+          jade.compileFile("templates/post.jade")(Object.assign({post}, blogProps)),
           callback
         );
       }, callback);
@@ -121,12 +121,12 @@ function constructBlog(blogProps, callback) {
   ], callback);
 }
 
-function getPages(articles) {
-  const pages = range(articles.length / 5 + 1 | 1).map(page => {
+function getPages(posts) {
+  const pages = range(posts.length / 5 + 1 | 1).map(page => {
     return {
       link: `/pages/${page}`,
       index: page,
-      articles: getArticlesAt(articles, page, 5),
+      posts: getArticlesAt(posts, page, 5),
     };
   });
 
@@ -143,18 +143,18 @@ function getPages(articles) {
   return pages;
 }
 
-function createBlogProps(articles, callback) {
+function createBlogProps(posts, callback) {
   callback(
     null,
     {
       meta,
-      pages: getPages(articles),
+      pages: getPages(posts),
     }
   );
 }
 
 waterfall([
-  partial(glob, "articles/*.jade", {}),
+  partial(glob, "posts/*.jade", {}),
   createArticles,
   createBlogProps,
   constructBlog,

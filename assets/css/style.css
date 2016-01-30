@@ -33,7 +33,7 @@ a:hover:before {
   transform: scaleX(1);
 }
 
-.article {
+.post {
   width: 768px;
   margin: 0 auto;
   padding: 2em 0;
@@ -41,31 +41,31 @@ a:hover:before {
   white-space: pre-line;
 }
 
-.article:last-of-type {
+.post:last-of-type {
   border-bottom: none;
 }
 
-.article h1 {
+.post h1 {
   font-size: 2em;
   margin: 1em 0;
   color: #c36;
 }
 
-.article h1 a:before {
+.post h1 a:before {
   display: none;
 }
 
-.article h2 {
+.post h2 {
   font-weight: bold;
   font-size: 1.25em;
   margin: 2em auto 0 auto;
 }
 
-.article p {
+.post p {
   margin: 1em 0;
 }
 
-.article .article-date {
+.post .post-date {
   margin: .5em 0 -2em 0;
 }
 
@@ -78,7 +78,7 @@ a:hover:before {
     position: absolute;
   }
  
-  .article {
+  .post {
     width: auto;
     margin: 0 2em;
   }

@@ -2,8 +2,8 @@
 
 set -e
 
-FILE=articles/$1.jade
-TEMPLATE=templates/article.jade.template
+FILE=posts/$1.jade
+TEMPLATE=templates/post.jade.template
 DATE=`date +%Y-%m-%d`
 
 if ! test -e $FILE; then

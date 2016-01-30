@@ -1,0 +1,18 @@
+extend layouts/base
+
+block append meta
+  //- Meta Infomation
+  title= post.title + " - " + meta.title
+  meta(name="description", content=meta.description)
+  meta(name="keywords", content=meta.keywords)
+  link(rel="canonical", href="/")
+
+block content
+  article.post
+    p.post-date!= post.date
+    h1!= post.title
+    != post.body
+  if post.prevLink
+    a.prev-post(href=post.prevLink) Prev
+  if post.nextLink
+    a.next-post(href=post.nextLink) Next
