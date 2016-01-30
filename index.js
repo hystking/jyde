@@ -13,6 +13,7 @@ const groupBy = require("lodash.groupby");
 const range = require("lodash.range");
 const meta = require("./meta");
 const moment = require("moment");
+const md5 = require("md5");
 
 function exactArticleAttributes(content) {
   const attributes = {};
@@ -147,6 +148,7 @@ function createBlogProps(posts, callback) {
   callback(
     null,
     {
+      hash: md5("salt-puwbiyskcythc855-" + Date.now()),
       meta,
       pages: getPages(posts),
     }
