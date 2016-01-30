@@ -46,7 +46,7 @@ function createArticles(filenames, callback) {
   each(filenames, (filename, callback) => {
     fs.readFile(filename, (err, content) => {
       const basename = path.basename(filename, ".jade");
-      const link = `/articles/${basename}.html`
+      const link = `/articles/${basename}`
       const attributes = exactArticleAttributes(content);
       const body = jade.compile(content, {filename})({attributes});
       callback(null, Object.assign({body, basename, link}, attributes));
@@ -124,7 +124,7 @@ function constructBlog(blogProps, callback) {
 function getPages(articles) {
   const pages = range(articles.length / 5 + 1 | 1).map(page => {
     return {
-      link: `/pages/${page}.html`,
+      link: `/pages/${page}`,
       index: page,
       articles: getArticlesAt(articles, page, 5),
     };
