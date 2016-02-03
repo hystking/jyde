@@ -50,7 +50,16 @@ function createArticles(filenames, callback) {
       const link = `/posts/${basename}`
       const attributes = exactArticleAttributes(content);
       const body = jade.compile(content, {filename})({attributes});
-      callback(null, Object.assign({body, basename, link}, attributes));
+      let excerpt = body;
+
+      // check excerpt
+      const splitedContents = content.toString().split(/ *\/\/- *more */g);
+      if(splitedContents.length > 1) {
+        // has excerpt
+        excerpt = jade.compile(splitedContents[0], {filename})({attributes});
+      }
+
+      callback(null, Object.assign({body, excerpt, basename, link}, attributes));
     });
   }, (err, posts) => {
 
